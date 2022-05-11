@@ -30,6 +30,7 @@
                     <td>{{ customer.first_name }} {{ customer.last_name }}</td>
                     <td>{{ customer.phone_number }}</td>
                     <td>
+                        <a href="/customers/{{ customer.id }}">View</a>
                         <a href="/customers/edit/{{ customer.id }}">Edit</a>
                         <a href="/customers/delete/{{ customer.id }}">Delete</a>
                     </td>

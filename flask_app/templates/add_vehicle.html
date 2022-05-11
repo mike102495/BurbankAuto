@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Burbank Auto</title>
+</head>
+<body>
+    <div class="navbar navbar-light bg-light">
+        <h1>Add New Vehicle for {{customer.first_name}} {{customer.last_name}}</h1>
+        <div>
+            <a href="/users/home" class="navbar-brand">Home</a>
+            <a href="/logout" class="navbar-brand">Logout</a>
+        </div>
+    </div>
+    <div class="container d-flex justify-content-around">
+        <form action="/create_vehicle" method="post" class="form-group bg-light text-info col-4 p-4">
+            <input type="hidden" name="customer_id" value="{{ customer.id }}">
+            <label class="form-group">
+                Make:
+                <input type="text" name="make">
+            </label>
+            <label class="form-group">
+                Model:
+                <input type="text" name="model">
+            </label>
+            <label class="form-group">
+                Year:
+                <input type="text" name="year">
+            </label>
+            <label class="form-group">
+                VIN:
+                <input type="text" name="vin">
+            </label>
+            <input type="submit" value="Create Vehicle" class="btn btn-primary">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-danger bg-light">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </form>
+    </div>
+</body>
+</html>
