@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Burbank Auto</title>
+</head>
+<body>
+    <div class="container-fluid bg-light">
+        <div class="navbar navbar-light bg-dark text-light">
+            <h4>Welcome {{ session.first_name }}!</h4>
+            <h1>Burbank Auto</h1>
+            <div>
+                <a class="btn btn-info" href="/vehicles/{{repair_order.vehicle_id}}" class="navbar-brand">Vehicle</a>
+                <a class="btn btn-success" href="/users/home" class="navbar-brand">Home</a>
+                <a class="btn btn-primary" href="/logout" class="navbar-brand">Logout</a>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center m-3">
+            <h2>{{repair_order.first_name}} {{repair_order.last_name}}'s {{repair_order.model}}</h2>
+        </div>
+        <div class="m-2">
+            <h4><span class="text-info">R.O.</span> # {{repair_order.id}}</h4>
+            <h4><span class="text-info">Date:</span> {{repair_order.date}}</h4>
+            <h4><span class="text-info">Mileage:</span> {{repair_order.mileage}}</h4>
+            <h4><span class="text-info">Price:</span> {{repair_order.price}}</h4>
+            <h4><span class="text-info">Breif Description:</span> {{repair_order.breif_descrip}}</h4>
+            <h4><span class="text-info">Description:</span> {{repair_order.full_descrip}}</h4>
+        </div>
+        <div class="m-1">
+            <a class="btn btn-warning" href="/repair_orders/edit/{{ repair_order.id }}">Edit</a>
+            <a class="btn btn-danger" href="/repair_orders/delete/{{ repair_order.vehicle_id }}/{{ repair_order.id }}">Delete</a>
+        </div>
+    </div>
+</body>
+</html>

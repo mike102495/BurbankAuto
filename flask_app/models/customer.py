@@ -45,6 +45,7 @@ class Customer:
         WHERE id = %(id)s
         ;"""
         result = connectToMySQL(cls.db).query_db(query,data)
+        print(result[0])
         return cls(result[0])
 
     @classmethod
@@ -75,7 +76,7 @@ class Customer:
         if len(data['last_name']) < 2:
             flash('Last name must be at least 2 characters.')
             is_valid = False
-        if len(data['phone_number']) < 1 :
-            flash('Enter phone number.')
+        if len(data['phone_number']) < 7 :
+            flash('Phone number must be at least 7 characters.')
             is_valid = False
         return is_valid

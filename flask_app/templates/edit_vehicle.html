@@ -8,42 +8,61 @@
     <title>Burbank Auto</title>
 </head>
 <body>
-    <div class="navbar navbar-light bg-light">
-        <h1>Edit {{vehicle.first_name}}'s {{vehicle.make}} {{vehicle.model}}</h1>
-        <div>
-            <a href="/users/home" class="navbar-brand">Home</a>
-            <a href="/logout" class="navbar-brand">Logout</a>
+    <div class="container-fluid bg-light">
+        <div class="navbar navbar-light bg-dark text-light">
+            <h4>Welcome {{ session.first_name }}!</h4>
+            <h1>Burbank Auto</h1>
+            <div>
+                <a class="btn btn-info" href="/vehicles/{{vehicle.id}}" class="navbar-brand">Vehicle</a>
+                <a class="btn btn-success" href="/users/home" class="navbar-brand">Home</a>
+                <a class="btn btn-primary" href="/logout" class="navbar-brand">Logout</a>
+            </div>
         </div>
-    </div>
-    <div class="container d-flex justify-content-around">
-        <form action="/edit_vehicle" method="post" class="form-group bg-light text-info col-4 p-4">
-            <input type="hidden" name="customer_id" value="{{ vehicle.customer_id }}">
-            <input type="hidden" name="id" value="{{ vehicle.id }}">
-            <label class="form-group">
-                Make:
-                <input type="text" name="make" value="{{vehicle.make}}">
-            </label>
-            <label class="form-group">
-                Model:
-                <input type="text" name="model" value="{{vehicle.model}}">
-            </label>
-            <label class="form-group">
-                Year:
-                <input type="text" name="year" value="{{vehicle.year}}">
-            </label>
-            <label class="form-group">
-                VIN:
-                <input type="text" name="vin" value="{{vehicle.vin}}">
-            </label>
-            <input type="submit" value="Edit Vehicle" class="btn btn-primary">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <p class="text-danger bg-light">{{ message }}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        </form>
+        <h2 class="text-center">Edit {{vehicle.first_name}}'s {{vehicle.make}} {{vehicle.model}}</h2>
+        <div class="container d-flex justify-content-around">
+            <form action="/edit_vehicle" method="post">
+                <input type="hidden" name="customer_id" value="{{ vehicle.customer_id }}">
+                <input type="hidden" name="id" value="{{ vehicle.id }}">
+                <div class="d-flex">
+                    <div class="d-block m-2">
+                        <div>
+                            <label>
+                                Make:
+                                <input class="form-control" type="text" name="make" value="{{vehicle.make}}">
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Model:
+                                <input class="form-control" type="text" name="model" value="{{vehicle.model}}">
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Year:
+                                <input class="form-control" type="text" name="year" value="{{vehicle.year}}">
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                VIN:
+                                <input class="form-control" type="text" name="vin" value="{{vehicle.vin}}">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p class="text-danger bg-light">{{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
+                <input type="submit" value="Edit Vehicle" class="btn btn-primary m-2">
+            </form>
+        </div>
     </div>
 </body>
 </html>

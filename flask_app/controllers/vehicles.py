@@ -1,6 +1,6 @@
 from flask_app import app
 from flask import render_template,redirect,request, session, flash
-from flask_app.models import vehicle, customer
+from flask_app.models import vehicle, customer, repair_order
 
 @app.route('/create_vehicle', methods = ['POST'])
 def create_vehicle():
@@ -26,7 +26,7 @@ def new_vehicle(id):
 def view_vehicle(id):
     if 'user_id' in session:
         data ={ "id" : id }
-        return render_template("view_vehicle.html", vehicle = vehicle.Vehicle.get_vehicle_and_customer_info_by_vehicle_id(data))
+        return render_template("view_vehicle.html", vehicle = vehicle.Vehicle.get_vehicle_and_customer_info_by_vehicle_id(data), repair_orders = repair_order.Repair_Order.get__vehicles_repair_orders(data))
     else:
         return redirect('/')
 
@@ -42,10 +42,9 @@ def edit_vehicle(id):
 def edit_vehicle_submit():
     if 'user_id' in session:
         this_vehicle = vehicle.Vehicle.edit_vehicle(request.form)
-        customer_id = request.form['customer_id']
         vehicle_id = request.form['id']
         if this_vehicle:
-            return redirect(f'/customers/{customer_id}')
+            return redirect(f'/vehicles/{vehicle_id}')
         else:
             return redirect(f'/vehicles/edit/{vehicle_id}')
     else:

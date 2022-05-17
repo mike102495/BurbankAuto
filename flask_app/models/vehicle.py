@@ -41,14 +41,15 @@ class Vehicle:
 
     @classmethod
     def get_vehicle_and_customer_info_by_vehicle_id(cls,data):
-        query  = """SELECT *
+        query  = """
+        SELECT *
         FROM vehicles
-        LEFT JOIN customers
-        ON vehicles.customer_id = customers.id
+        JOIN customers
+        ON customers.id = vehicles.customer_id
         WHERE vehicles.id = %(id)s
         ;"""
         result = connectToMySQL(cls.db).query_db(query,data)
-        return cls(result[0])
+        return result[0]
 
     @classmethod
     def edit_vehicle(cls,data):

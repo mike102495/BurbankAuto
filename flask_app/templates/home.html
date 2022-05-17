@@ -8,35 +8,38 @@
     <title>Burbank Auto</title>
 </head>
 <body>
-    <div class="navbar navbar-light bg-light">
-        <h1>Welcome {{ session.first_name }}!</h1>
-        <div>
-            <a href="/logout" class="navbar-brand">Logout</a>
+    <div class="container-fluid bg-light">
+        <div class="navbar navbar-light bg-dark text-light">
+            <h4>Welcome {{ session.first_name }}!</h4>
+            <h1>Burbank Auto</h1>
+            <div>
+                <a class="btn btn-primary" href="/logout" class="navbar-brand">Logout</a>
+            </div>
+        </div>
+        <div class="m-2">
+            <h2 class="text-center text-primary">Customers</h2>
+        </div>
+        <div class="m-2">
+            <table class="table table-sm table-hover table-striped">
+                <thead class="thead-dark">
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    {% for customer in customers %}
+                        <tr>
+                            <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+                            <td>{{ customer.phone_number }}</td>
+                            <td>
+                                <a class="btn btn-outline-info btn-sm" href="/customers/{{ customer.id }}">View</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/customers/new" class="btn btn-primary m-1">Add Customer</a>
         </div>
     </div>
-    <div>
-        <h3>Customers</h3>
-        <a href="/customers/new" class="btn btn-primary">Add Customer</a>
-    </div>
-    <table class="table table-sm">
-        <thead>
-            <th>Name</th>
-            <th>Phone Number</th>
-            <th>Actions</th>
-        </thead>
-        <tbody>
-            {% for customer in customers %}
-                <tr>
-                    <td>{{ customer.first_name }} {{ customer.last_name }}</td>
-                    <td>{{ customer.phone_number }}</td>
-                    <td>
-                        <a href="/customers/{{ customer.id }}">View</a>
-                        <a href="/customers/edit/{{ customer.id }}">Edit</a>
-                        <a href="/customers/delete/{{ customer.id }}">Delete</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 </body>
 </html>

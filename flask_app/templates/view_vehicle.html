@@ -13,48 +13,47 @@
             <h4>Welcome {{ session.first_name }}!</h4>
             <h1>Burbank Auto</h1>
             <div>
+                <a class="btn btn-info" href="/customers/{{vehicle.customer_id}}" class="navbar-brand">Customer</a>
                 <a class="btn btn-success" href="/users/home" class="navbar-brand">Home</a>
                 <a class="btn btn-primary" href="/logout" class="navbar-brand">Logout</a>
             </div>
         </div>
         <div class="d-flex justify-content-between m-2">
-            <h2 class="text-primary">{{customer.first_name}} {{customer.last_name}}</h2>
+            <h2 class="text-primary">{{vehicle.first_name}} {{vehicle.last_name}}'s {{vehicle.model}}</h2>
             <div class="m-1">
-                <a class="btn btn-warning" href="/customers/edit/{{ customer.id }}">Edit Customer</a>
-                <a class="btn btn-danger" href="/customers/delete/{{ customer.id }}">Delete Customer</a>
+                <a class="btn btn-warning" href="/vehicles/edit/{{ vehicle.id }}">Edit Vehicle</a>
+                <a class="btn btn-danger" href="/vehicles/delete/{{vehicle.customer_id}}/{{ vehicle.id }}">Delete Vehicle</a>
             </div>
         </div>
         <div class="m-2">
-            
-            <h4><span class="text-info">Phone Number:</span> {{customer.phone_number}}</h4>
-            <h4><span class="text-info">Address:</span> {{customer.address}}</h4>
-            <h4><span class="text-info">Email:</span> {{customer.email}}</h4>
+            <h4><span class="text-info">Year:</span> {{vehicle.year}}</h4>
+            <h4><span class="text-info">Make:</span> {{vehicle.make}}</h4>
+            <h4><span class="text-info">Model:</span> {{vehicle.model}}</h4>
+            <h4><span class="text-info">VIN:</span> {{vehicle.vin}}</h4>
         </div>
-        <div class="m-2">
+        <div class=" m-2">
             <table class="table table-sm table-hover table-striped">
-                <h2 class="text-center text-info">Vehicles</h2>
+                <h2 class="text-center text-info">Repair Orders</h2>
                 <thead class="thead-dark">
-                    <th>Year</th>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>VIN</th>
+                    <th>Date</th>
+                    <th>Mileage</th>
+                    <th>Breif Description</th>
                     <th>Actions</th>
                 </thead>
                 <tbody>
-                    {% for vehicle in vehicles %}
+                    {% for repair_order in repair_orders %}
                         <tr>
-                            <td>{{ vehicle.year }}</td>
-                            <td>{{ vehicle.make }}</td>
-                            <td>{{ vehicle.model }}</td>
-                            <td>{{ vehicle.vin }}</td>
+                            <td>{{ repair_order.date.strftime('%B %d %Y') }}</td>
+                            <td>{{ repair_order.mileage }}</td>
+                            <td>{{ repair_order.breif_descrip }}</td>
                             <td>
-                                <a class="btn btn-outline-info btn-sm" href="/vehicles/{{ vehicle.id }}">View Vehicle</a>
+                                <a class="btn btn-outline-info btn-sm" href="/repair_orders/{{ repair_order.id }}">View R.O.</a>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <a href="/vehicles/new/{{customer.id}}" class="btn btn-primary">Add Vehicle</a>
+            <a href="/repair_orders/new/{{vehicle.id}}" class="btn btn-primary">Add Repair Order</a>
         </div>
     </div>
 </body>

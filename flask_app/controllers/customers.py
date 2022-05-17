@@ -42,7 +42,7 @@ def edit_customer_submit():
         this_customer = customer.Customer.edit_customer(request.form)
         customer_id = request.form['id']
         if this_customer:
-            return redirect('/users/home')
+            return redirect(f'/customers/{customer_id}')
         else:
             return redirect(f'/customers/edit/{customer_id}')
     else:

@@ -13,47 +13,48 @@
             <h4>Welcome {{ session.first_name }}!</h4>
             <h1>Burbank Auto</h1>
             <div>
+                <a class="btn btn-info" href="/repair_orders/{{repair_order.id}}" class="navbar-brand">R.O.</a>
                 <a class="btn btn-success" href="/users/home" class="navbar-brand">Home</a>
                 <a class="btn btn-primary" href="/logout" class="navbar-brand">Logout</a>
             </div>
         </div>
-        <h2 class="text-center">Add New Customer</h2>
+        <h2 class="text-center">Edit R.O. #{{repair_order.id}}</h2>
         <div class="container d-flex justify-content-around">
-            <form action="/create_customer" method="post">
+            <form action="/edit_repair_order" method="post">
+                <input type="hidden" name="vehicle_id" value="{{ repair_order.vehicle_id }}">
+                <input type="hidden" name="id" value="{{ repair_order.id }}">
                 <div class="d-flex">
                     <div class="d-block m-2">
                         <div>
                             <label>
-                                First Name:
-                                <input class="form-control" type="text" name="first_name">
+                                Date:
+                                <input class="form-control" type="date" name="date" value="{{repair_order.date}}">
                             </label>
                         </div>
                         <div>
                             <label>
-                                Last Name:
-                                <input class="form-control" type="text" name="last_name">
+                                Price:
+                                <input class="form-control" type="number" name="price" value="{{repair_order.price}}">
                             </label>
                         </div>
                         <div>
                             <label>
-                                Phone Number:
-                                <input class="form-control" type="text" name="phone_number">
+                                Mileage:
+                                <input class="form-control" type="number" name="mileage" value="{{repair_order.mileage}}">
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Breif Description:
+                                <input class="form-control" type="text" name="breif_descrip" value="{{repair_order.breif_descrip}}">
                             </label>
                         </div>
                     </div>
-                    <div class="d-block m-2">
-                        <div>
-                            <label>
-                                Address:
-                                <input class="form-control" type="text" name="address">
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                Email:
-                                <input class="form-control" type="text" name="email">
-                            </label>
-                        </div>
+                    <div class="form-group m-2">
+                        <label>
+                            Full Description:
+                            <textarea class="form-control" name="full_descrip" cols="50" rows="10">{{repair_order.full_descrip}}</textarea>
+                        </label>
                     </div>
                     <div class="p-4">
                         {% with messages = get_flashed_messages() %}
@@ -65,7 +66,7 @@
                         {% endwith %}
                     </div>
                 </div>
-                <input type="submit" value="Create Customer" class="btn btn-primary m-2">
+                <input type="submit" value="Edit R.O." class="btn btn-primary m-2">
             </form>
         </div>
     </div>
